@@ -19,7 +19,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->statusbar->showMessage("Powered by Maxi");
 
     QSerialPort1 = new QSerialPort(this);
-    QSerialPort1->setPortName("COM10");
+    QSerialPort1->setPortName("COM15");
     QSerialPort1->setBaudRate(115200);
     QSerialPort1->setDataBits(QSerialPort::Data8);
     QSerialPort1->setParity(QSerialPort::NoParity);
@@ -251,7 +251,7 @@ void MainWindow::onQSerialPort1Rx(){
 
 void MainWindow::decodeData(){
     strRxProcess = "Made by Bonnin ---- Version: 0x";
-    uint16_t valueIRIzq=0, valueIRDer=0, valueIRMed=0;
+    uint16_t valueIR0=0, valueIR1=0, valueIR2=0, valueIR3=0, valueIR4=0, valueIR5=0, valueIR6=0, valueIR7=0;
     uint32_t speedM1 = 0, speedM2 = 0;
     float dataRecive;
 
@@ -270,23 +270,47 @@ void MainWindow::decodeData(){
     case IR_SENSOR:
         myWord.ui8[0] = bufRX[1];
         myWord.ui8[1] = bufRX[2];
-        valueIRIzq = myWord.ui32;
+        valueIR0 = myWord.ui16[0];
 
         myWord.ui8[0] = bufRX[3];
         myWord.ui8[1] = bufRX[4];
-        valueIRDer = myWord.ui32;
+        valueIR1 = myWord.ui16[0];
 
         myWord.ui8[0] = bufRX[5];
         myWord.ui8[1] = bufRX[6];
-        valueIRMed = myWord.ui32;
+        valueIR2 = myWord.ui16[0];
 
+        myWord.ui8[0] = bufRX[7];
+        myWord.ui8[1] = bufRX[8];
+        valueIR3 = myWord.ui16[0];
+
+        myWord.ui8[0] = bufRX[9];
+        myWord.ui8[1] = bufRX[10];
+        valueIR4 = myWord.ui16[0];
+
+        myWord.ui8[0] = bufRX[11];
+        myWord.ui8[1] = bufRX[12];
+        valueIR5 = myWord.ui16[0];
+
+        myWord.ui8[0] = bufRX[13];
+        myWord.ui8[1] = bufRX[14];
+        valueIR6 = myWord.ui16[0];
+
+        myWord.ui8[0] = bufRX[15];
+        myWord.ui8[1] = bufRX[16];
+        valueIR7 = myWord.ui16[0];
 
         if (isEnable.irsensor){
 //            ui->lineEdit_4->setText(QString("%1").arg(valueIRIzq));
 //            ui->lineEdit_5->setText(QString("%1").arg(valueIRDer));
-            ui->lcdNumber_4->display(QString("%1").arg(valueIRIzq));
-            ui->lcdNumber_5->display(QString("%1").arg(valueIRDer));
-            ui->lcdNumber_6->display(QString("%1").arg(valueIRMed));
+            ui->lcdNumber_4->display(QString("%1").arg(valueIR0));
+            ui->lcdNumber_5->display(QString("%1").arg(valueIR1));
+            ui->lcdNumber_6->display(QString("%1").arg(valueIR2));
+            ui->lcdNumber_7->display(QString("%1").arg(valueIR3));
+            ui->lcdNumber_8->display(QString("%1").arg(valueIR4));
+            ui->lcdNumber_9->display(QString("%1").arg(valueIR5));
+            ui->lcdNumber_11->display(QString("%1").arg(valueIR6));
+            ui->lcdNumber_12->display(QString("%1").arg(valueIR7));
             ui->progressBar_4->setValue(valueIRIzq);
             ui->progressBar_5->setValue(valueIRDer);
             ui->progressBar_6->setValue(valueIRMed);
@@ -294,6 +318,11 @@ void MainWindow::decodeData(){
             ui->lcdNumber_4->display("0");
             ui->lcdNumber_5->display("0");
             ui->lcdNumber_6->display("0");
+            ui->lcdNumber_7->display("0");
+            ui->lcdNumber_8->display("0");
+            ui->lcdNumber_9->display("0");
+            ui->lcdNumber_11->display("0");
+            ui->lcdNumber_12->display("0");
             ui->progressBar_4->setValue(0);
             ui->progressBar_5->setValue(0);
             ui->progressBar_6->setValue(0);
