@@ -10,6 +10,7 @@
 #include <QInputDialog>
 #include <QProgressBar>
 #include <QtWidgets>
+#include <QSerialPortInfo>
 
 
 
@@ -51,9 +52,11 @@ private slots:
 
     void on_actionIR_Sensors_toggled(bool arg1);
 
-    void on_actionDistancia_toggled(bool arg1);
+    void on_actionDistancia_toggled();
 
-    void on_actionVelocidad_toggled(bool arg1);
+    void on_actionVelocidad_toggled();
+
+    void on_pushButton_Refresh_clicked();
 
 private:
     Ui::MainWindow *ui;

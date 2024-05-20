@@ -19,7 +19,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->statusbar->showMessage("Powered by Maxi");
 
     QSerialPort1 = new QSerialPort(this);
-    QSerialPort1->setPortName("COM15");
+    //QSerialPort1->setPortName("COM9"); //<============================================  Número de puerto
     QSerialPort1->setBaudRate(115200);
     QSerialPort1->setDataBits(QSerialPort::Data8);
     QSerialPort1->setParity(QSerialPort::NoParity);
@@ -46,18 +46,11 @@ MainWindow::MainWindow(QWidget *parent)
     ui->radioButton_5->setEnabled(false);
     ui->doubleSpinBox->setEnabled(false);
 
-    ui->label_veloc_izq->setEnabled(false);
 //    ui->lineEdit->setEnabled(false);
 //    ui->label_veloc_der->setEnabled(false);
 //    ui->lineEdit_2->setEnabled(false);
 //    ui->label_dist->setEnabled(false);
 //    ui->lineEdit_3->setEnabled(false);
-    ui->lcdNumber->setEnabled(false);
-    ui->label_veloc_der->setEnabled(false);
-    ui->lcdNumber_2->setEnabled(false);
-    ui->label_dist->setEnabled(false);
-    ui->lcdNumber_3->setEnabled(false);
-
 
     ui->label_irizq->setEnabled(false);
     ui->lcdNumber_4->setEnabled(false);
@@ -66,34 +59,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->label_irmed->setEnabled(false);
     ui->lcdNumber_6->setEnabled(false);
 
-    ui->plainTextEdit->setVisible(false);
-
-    ui->progressBar->setEnabled(false);
-    ui->progressBar_2->setEnabled(false);
-    ui->progressBar_3->setEnabled(false);
-    ui->progressBar_4->setEnabled(false);
-    ui->progressBar_5->setEnabled(false);
-    ui->progressBar_6->setEnabled(false);
-
-    ui->progressBar->setRange(0,50);
-    ui->progressBar->setValue(0);
-
-    ui->progressBar_2->setRange(0,50);
-    ui->progressBar_2->setValue(0);
-
-    ui->progressBar_3->setRange(0,40);
-    ui->progressBar_3->setValue(0);
-
-    ui->progressBar_4->setRange(0,200);
-    ui->progressBar_4->setValue(0);
-
-    ui->progressBar_5->setRange(0,200);
-    ui->progressBar_5->setValue(0);
-
-    ui->progressBar_6->setRange(0,200);
-    ui->progressBar_6->setValue(0);
-
-
+    ui->plainTextEdit_Payload->setVisible(true);
 
 //    ui->addWidget(QToolButton);
     setWindowTitle("Panel de Control del AUTITO");
@@ -146,6 +112,10 @@ void MainWindow::drawBackGround(QPixmap *bkPixmap){
 
 void MainWindow::on_pushButton_3_clicked()
 {
+    QString port = ui->comboBox_SerialSelector->currentText();
+
+    QSerialPort1->setPortName(port);
+
     if(QSerialPort1->isOpen()){
         QSerialPort1->close();
         ui->pushButton_3->setText("OPEN");
@@ -181,7 +151,7 @@ void MainWindow::onQSerialPort1Rx(){
     for (int i=0; i<count; i++) {
         strHex = strHex + QString("%1").arg(buf[i], 2, 16, QChar('0')).toUpper();
     }
-    ui->plainTextEdit->appendPlainText(strHex);
+    ui->plainTextEdit_Payload->appendPlainText(strHex);
 
     for (int i=0; i<count; i++) {
         switch (header) {
@@ -258,8 +228,8 @@ void MainWindow::decodeData(){
 
     switch (bufRX[0]) {
     case 0x11:
-        ui->plainTextEdit->appendPlainText(QString("%1").arg(bufRX[1], 2, 16, QChar('0')).toUpper());
-        ui->plainTextEdit->appendPlainText(QString("%1").arg(bufRX[2], 2, 16, QChar('0')).toUpper());
+        ui->plainTextEdit_Payload->appendPlainText(QString("%1").arg(bufRX[1], 2, 16, QChar('0')).toUpper());
+        ui->plainTextEdit_Payload->appendPlainText(QString("%1").arg(bufRX[2], 2, 16, QChar('0')).toUpper());
         break;
 
     case FIRMWARE:
@@ -300,7 +270,18 @@ void MainWindow::decodeData(){
         myWord.ui8[1] = bufRX[16];
         valueIR7 = myWord.ui16[0];
 
-        if (isEnable.irsensor){
+
+        ui->lcdNumber_4->display(QString("%1").arg(valueIR0));
+        ui->lcdNumber_5->display(QString("%1").arg(valueIR1));
+        ui->lcdNumber_6->display(QString("%1").arg(valueIR2));
+        ui->lcdNumber_7->display(QString("%1").arg(valueIR3));
+        ui->lcdNumber_8->display(QString("%1").arg(valueIR4));
+        ui->lcdNumber_9->display(QString("%1").arg(valueIR5));
+        ui->lcdNumber_11->display(QString("%1").arg(valueIR6));
+        ui->lcdNumber_12->display(QString("%1").arg(valueIR7));
+
+/*      Para funcionar con el toggle del submenú
+ *      if (isEnable.irsensor){
 //            ui->lineEdit_4->setText(QString("%1").arg(valueIRIzq));
 //            ui->lineEdit_5->setText(QString("%1").arg(valueIRDer));
             ui->lcdNumber_4->display(QString("%1").arg(valueIR0));
@@ -327,6 +308,7 @@ void MainWindow::decodeData(){
             ui->progressBar_5->setValue(0);
             ui->progressBar_6->setValue(0);
         }
+*/
         break;
 
     case ULTRA_SONIC:
@@ -335,16 +317,7 @@ void MainWindow::decodeData(){
         myWord.ui8[2] = bufRX[3];
         myWord.ui8[3] = bufRX[4];
         dataRecive = myWord.ui32/58.0;
-        //ui->plainTextEdit->appendPlainText(QString("%1").arg(dataRecive));
-        if (isEnable.ultrasonic){
-//            ui->lineEdit_3->setText(QString("%1").arg(dataRecive));
-            ui->lcdNumber_3->display(QString("%1").arg(dataRecive));
-            ui->progressBar_3->setValue(dataRecive);
-        }else{
-//            ui->lineEdit_3->clear();
-            ui->lcdNumber_3->display("0");
-            ui->progressBar_3->setValue(0);
-        }
+        //ui->plainTextEdit_Payload->appendPlainText(QString("%1").arg(dataRecive));
         break;
 
     case HORQUILLA:
@@ -359,20 +332,7 @@ void MainWindow::decodeData(){
         myWord.ui8[2] = bufRX[7];
         myWord.ui8[3] = bufRX[8];
         speedM2 = myWord.ui32;
-        if (isEnable.horquilla){
-//            ui->lineEdit->setText(QString("%1").arg(speedM1));
-//            ui->lineEdit_2->setText(QString("%1").arg(speedM2));
-            ui->lcdNumber->display(QString("%1").arg(speedM1));
-            ui->lcdNumber_2->display(QString("%1").arg(speedM2));
-            ui->progressBar->setValue(speedM1);
-            ui->progressBar_2->setValue(speedM2);
-        }else{
-//            ui->lineEdit_2->clear();
-            ui->lcdNumber->display("0");
-            ui->lcdNumber_2->display("0");
-            ui->progressBar->setValue(0);
-            ui->progressBar_2->setValue(0);
-        }
+
         break;
     }
 }
@@ -386,7 +346,7 @@ void MainWindow::on_encodeData_clicked()
 
     cmd = ui->comboBox->currentData().toInt();
 
-    ui->plainTextEdit->appendPlainText(QString("%1").arg(cmd, 2, 16, QChar('0')).toUpper());
+    ui->plainTextEdit_Payload->appendPlainText(QString("%1").arg(cmd, 2, 16, QChar('0')).toUpper());
 
     switch (cmd) {
     case ALIVE:
@@ -396,7 +356,7 @@ void MainWindow::on_encodeData_clicked()
         break;
 
     case IR_SENSOR:
-//        ID = IR_SENSOR;
+/*        ID = IR_SENSOR;
 //        length = 0;
 //        readyToSend = true;
 
@@ -412,7 +372,7 @@ void MainWindow::on_encodeData_clicked()
 //            ui->label_irder->setEnabled(true);
 //            ui->lcdNumber_4->setEnabled(true);
 //            ui->lcdNumber_5->setEnabled(true);
-//        }
+//        }*/
 
 
         break;
@@ -455,11 +415,11 @@ void MainWindow::on_encodeData_clicked()
         payLoad[0] = dataPayload.ui8[0];
 
         if(ok){
-            ui->plainTextEdit->appendPlainText("OK");
-            ui->plainTextEdit->appendPlainText(QString().number(dataPayload.i32));
+            ui->plainTextEdit_Payload->appendPlainText("OK");
+            ui->plainTextEdit_Payload->appendPlainText(QString().number(dataPayload.i32));
             readyToSend = true;
         }else{
-            ui->plainTextEdit->appendPlainText("CANCEL");
+            ui->plainTextEdit_Payload->appendPlainText("CANCEL");
             readyToSend = false;
         }
 
@@ -468,7 +428,7 @@ void MainWindow::on_encodeData_clicked()
         break;
 
     case ULTRA_SONIC:
-//        ID = ULTRA_SONIC;
+/*        ID = ULTRA_SONIC;
 //        length = 0;
 //        readyToSend = true;
 //        if (isEnable.ultrasonic){
@@ -479,11 +439,11 @@ void MainWindow::on_encodeData_clicked()
 //            isEnable.ultrasonic=1;
 //            ui->label_dist->setEnabled(true);
 //            ui->lcdNumber_3->setEnabled(true);
-//        }
+//        }*/
         break;
 
     case HORQUILLA:
-//        ID = HORQUILLA;
+/*        ID = HORQUILLA;
 //        length = 0;
 //        readyToSend = true;
 
@@ -499,7 +459,7 @@ void MainWindow::on_encodeData_clicked()
 //            ui->lcdNumber->setEnabled(true);
 //            ui->label_veloc_der->setEnabled(true);
 //            ui->lcdNumber_2->setEnabled(true);
-//        }
+//        }*/
         break;
     }
 
@@ -543,7 +503,7 @@ void MainWindow::sendData()
     for (int i=0; i<8+length; i++) {
         str = str + QString("%1").arg(tx[i], 2, 16, QChar('0')).toUpper();
     }
-    ui->plainTextEdit->appendPlainText(str);
+    ui->plainTextEdit_Payload->appendPlainText(str);
 }
 
 void MainWindow::on_comboBox_currentIndexChanged(int index)
@@ -572,9 +532,9 @@ void MainWindow::on_comboBox_currentIndexChanged(int index)
 void MainWindow::on_actionEnable_Debigging_toggled(bool arg1)
 {
     if (arg1)
-        ui->plainTextEdit->setVisible(true);
+        ui->plainTextEdit_Payload->setVisible(false);
     else
-        ui->plainTextEdit->setVisible(false);
+        ui->plainTextEdit_Payload->setVisible(true);
 }
 
 void MainWindow::on_actionIR_Sensors_toggled(bool arg1)
@@ -587,9 +547,6 @@ void MainWindow::on_actionIR_Sensors_toggled(bool arg1)
         ui->lcdNumber_4->setEnabled(true);
         ui->lcdNumber_5->setEnabled(true);
         ui->lcdNumber_6->setEnabled(true);
-        ui->progressBar_4->setEnabled(true);
-        ui->progressBar_5->setEnabled(true);
-        ui->progressBar_6->setEnabled(true);
     }else {
         isEnable.irsensor=false;
         ui->label_irizq->setEnabled(false);
@@ -598,46 +555,31 @@ void MainWindow::on_actionIR_Sensors_toggled(bool arg1)
         ui->lcdNumber_4->setEnabled(false);
         ui->lcdNumber_5->setEnabled(false);
         ui->lcdNumber_6->setEnabled(false);
-        ui->progressBar_4->setEnabled(false);
-        ui->progressBar_5->setEnabled(false);
-        ui->progressBar_6->setEnabled(false);
     }
 }
 
-void MainWindow::on_actionDistancia_toggled(bool arg1)
+void MainWindow::on_actionDistancia_toggled()
 {
-    if (arg1){
-        isEnable.ultrasonic=1;
-        ui->label_dist->setEnabled(true);
-        ui->lcdNumber_3->setEnabled(true);
-        ui->progressBar_3->setEnabled(true);
-    }else{
-        isEnable.ultrasonic=0;
-        ui->label_dist->setEnabled(false);
-        ui->lcdNumber_3->setEnabled(false);
-        ui->progressBar_3->setEnabled(false);
-    }
+
 }
 
 
-void MainWindow::on_actionVelocidad_toggled(bool arg1)
+void MainWindow::on_actionVelocidad_toggled()
 {
-    if (arg1){
-        isEnable.horquilla=1;
-        ui->label_veloc_izq->setEnabled(true);
-        ui->lcdNumber->setEnabled(true);
-        ui->label_veloc_der->setEnabled(true);
-        ui->lcdNumber_2->setEnabled(true);
-        ui->progressBar->setEnabled(true);
-        ui->progressBar_2->setEnabled(true);
-    }else{
-        isEnable.horquilla=0;
-        ui->label_veloc_izq->setEnabled(false);
-        ui->lcdNumber->setEnabled(false);
-        ui->label_veloc_der->setEnabled(false);
-        ui->lcdNumber_2->setEnabled(false);
-        ui->progressBar->setEnabled(false);
-        ui->progressBar_2->setEnabled(false);
+
+}
+
+
+void MainWindow::on_pushButton_Refresh_clicked(){
+    const auto serialPortInfo = QSerialPortInfo::availablePorts();
+
+    ui->comboBox_SerialSelector->clear();
+
+    for (const QSerialPortInfo &portInfo : serialPortInfo){
+        ui->comboBox_SerialSelector->addItem(portInfo.portName(),portInfo.portName());
     }
+
+
+
 }
 

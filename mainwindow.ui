@@ -52,7 +52,7 @@
      <string>SEND</string>
     </property>
    </widget>
-   <widget class="QPlainTextEdit" name="plainTextEdit">
+   <widget class="QPlainTextEdit" name="plainTextEdit_Payload">
     <property name="geometry">
      <rect>
       <x>30</x>
@@ -177,60 +177,6 @@
      <string>Seleccione Sentido de Giro</string>
     </property>
    </widget>
-   <widget class="QLabel" name="label_veloc_izq">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>150</y>
-      <width>271</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>20</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>Veloc. Motor Izquierda</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_veloc_der">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>190</y>
-      <width>271</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>20</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>Veloc. Motor Derecha</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_dist">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>230</y>
-      <width>271</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>20</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>Distanica (cm)</string>
-    </property>
-   </widget>
    <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
@@ -276,8 +222,8 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>270</y>
-      <width>271</width>
+      <y>190</y>
+      <width>131</width>
       <height>31</height>
      </rect>
     </property>
@@ -294,8 +240,8 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>310</y>
-      <width>271</width>
+      <y>230</y>
+      <width>131</width>
       <height>31</height>
      </rect>
     </property>
@@ -308,125 +254,11 @@
      <string>Sensor IR 1</string>
     </property>
    </widget>
-   <widget class="QProgressBar" name="progressBar">
-    <property name="geometry">
-     <rect>
-      <x>370</x>
-      <y>150</y>
-      <width>118</width>
-      <height>30</height>
-     </rect>
-    </property>
-    <property name="value">
-     <number>24</number>
-    </property>
-    <property name="alignment">
-     <set>Qt::AlignCenter</set>
-    </property>
-    <property name="format">
-     <string>%p%</string>
-    </property>
-   </widget>
-   <widget class="QProgressBar" name="progressBar_2">
-    <property name="geometry">
-     <rect>
-      <x>370</x>
-      <y>190</y>
-      <width>118</width>
-      <height>30</height>
-     </rect>
-    </property>
-    <property name="value">
-     <number>24</number>
-    </property>
-    <property name="alignment">
-     <set>Qt::AlignCenter</set>
-    </property>
-    <property name="format">
-     <string>%p%</string>
-    </property>
-   </widget>
-   <widget class="QProgressBar" name="progressBar_3">
-    <property name="geometry">
-     <rect>
-      <x>370</x>
-      <y>230</y>
-      <width>118</width>
-      <height>30</height>
-     </rect>
-    </property>
-    <property name="value">
-     <number>24</number>
-    </property>
-    <property name="alignment">
-     <set>Qt::AlignCenter</set>
-    </property>
-    <property name="format">
-     <string>%p%</string>
-    </property>
-   </widget>
-   <widget class="QLCDNumber" name="lcdNumber">
-    <property name="geometry">
-     <rect>
-      <x>290</x>
-      <y>150</y>
-      <width>64</width>
-      <height>30</height>
-     </rect>
-    </property>
-    <property name="smallDecimalPoint">
-     <bool>true</bool>
-    </property>
-    <property name="digitCount">
-     <number>3</number>
-    </property>
-    <property name="segmentStyle">
-     <enum>QLCDNumber::Flat</enum>
-    </property>
-   </widget>
-   <widget class="QLCDNumber" name="lcdNumber_2">
-    <property name="geometry">
-     <rect>
-      <x>290</x>
-      <y>190</y>
-      <width>64</width>
-      <height>30</height>
-     </rect>
-    </property>
-    <property name="smallDecimalPoint">
-     <bool>true</bool>
-    </property>
-    <property name="digitCount">
-     <number>3</number>
-    </property>
-    <property name="segmentStyle">
-     <enum>QLCDNumber::Flat</enum>
-    </property>
-   </widget>
-   <widget class="QLCDNumber" name="lcdNumber_3">
-    <property name="geometry">
-     <rect>
-      <x>290</x>
-      <y>230</y>
-      <width>64</width>
-      <height>30</height>
-     </rect>
-    </property>
-    <property name="smallDecimalPoint">
-     <bool>true</bool>
-    </property>
-    <property name="digitCount">
-     <number>3</number>
-    </property>
-    <property name="segmentStyle">
-     <enum>QLCDNumber::Flat</enum>
-    </property>
-   </widget>
    <widget class="QLCDNumber" name="lcdNumber_4">
     <property name="geometry">
      <rect>
-      <x>290</x>
-      <y>270</y>
+      <x>150</x>
+      <y>190</y>
       <width>64</width>
       <height>30</height>
      </rect>
@@ -444,8 +276,8 @@
    <widget class="QLCDNumber" name="lcdNumber_5">
     <property name="geometry">
      <rect>
-      <x>290</x>
-      <y>310</y>
+      <x>150</x>
+      <y>230</y>
       <width>64</width>
       <height>30</height>
      </rect>
@@ -460,44 +292,12 @@
      <enum>QLCDNumber::Flat</enum>
     </property>
    </widget>
-   <widget class="QProgressBar" name="progressBar_4">
-    <property name="geometry">
-     <rect>
-      <x>370</x>
-      <y>270</y>
-      <width>118</width>
-      <height>30</height>
-     </rect>
-    </property>
-    <property name="value">
-     <number>24</number>
-    </property>
-    <property name="alignment">
-     <set>Qt::AlignCenter</set>
-    </property>
-   </widget>
-   <widget class="QProgressBar" name="progressBar_5">
-    <property name="geometry">
-     <rect>
-      <x>370</x>
-      <y>310</y>
-      <width>118</width>
-      <height>30</height>
-     </rect>
-    </property>
-    <property name="value">
-     <number>24</number>
-    </property>
-    <property name="alignment">
-     <set>Qt::AlignCenter</set>
-    </property>
-   </widget>
    <widget class="QLabel" name="label_irmed">
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>350</y>
-      <width>271</width>
+      <y>270</y>
+      <width>131</width>
       <height>31</height>
      </rect>
     </property>
@@ -513,8 +313,8 @@
    <widget class="QLCDNumber" name="lcdNumber_6">
     <property name="geometry">
      <rect>
-      <x>290</x>
-      <y>350</y>
+      <x>150</x>
+      <y>270</y>
       <width>64</width>
       <height>30</height>
      </rect>
@@ -529,43 +329,11 @@
      <enum>QLCDNumber::Flat</enum>
     </property>
    </widget>
-   <widget class="QProgressBar" name="progressBar_6">
-    <property name="geometry">
-     <rect>
-      <x>370</x>
-      <y>350</y>
-      <width>118</width>
-      <height>30</height>
-     </rect>
-    </property>
-    <property name="value">
-     <number>24</number>
-    </property>
-    <property name="alignment">
-     <set>Qt::AlignCenter</set>
-    </property>
-   </widget>
-   <widget class="QProgressBar" name="progressBar_7">
-    <property name="geometry">
-     <rect>
-      <x>820</x>
-      <y>270</y>
-      <width>118</width>
-      <height>30</height>
-     </rect>
-    </property>
-    <property name="value">
-     <number>24</number>
-    </property>
-    <property name="alignment">
-     <set>Qt::AlignCenter</set>
-    </property>
-   </widget>
    <widget class="QLCDNumber" name="lcdNumber_7">
     <property name="geometry">
      <rect>
-      <x>740</x>
-      <y>190</y>
+      <x>150</x>
+      <y>310</y>
       <width>64</width>
       <height>30</height>
      </rect>
@@ -583,9 +351,9 @@
    <widget class="QLabel" name="label_irmed_2">
     <property name="geometry">
      <rect>
-      <x>500</x>
-      <y>190</y>
-      <width>231</width>
+      <x>10</x>
+      <y>310</y>
+      <width>131</width>
       <height>31</height>
      </rect>
     </property>
@@ -601,8 +369,8 @@
    <widget class="QLCDNumber" name="lcdNumber_8">
     <property name="geometry">
      <rect>
-      <x>740</x>
-      <y>230</y>
+      <x>380</x>
+      <y>190</y>
       <width>64</width>
       <height>30</height>
      </rect>
@@ -617,28 +385,12 @@
      <enum>QLCDNumber::Flat</enum>
     </property>
    </widget>
-   <widget class="QProgressBar" name="progressBar_8">
-    <property name="geometry">
-     <rect>
-      <x>820</x>
-      <y>190</y>
-      <width>118</width>
-      <height>30</height>
-     </rect>
-    </property>
-    <property name="value">
-     <number>24</number>
-    </property>
-    <property name="alignment">
-     <set>Qt::AlignCenter</set>
-    </property>
-   </widget>
    <widget class="QLabel" name="label_irder_2">
     <property name="geometry">
      <rect>
-      <x>500</x>
-      <y>270</y>
-      <width>231</width>
+      <x>240</x>
+      <y>230</y>
+      <width>131</width>
       <height>31</height>
      </rect>
     </property>
@@ -651,28 +403,12 @@
      <string>Sensor IR 5</string>
     </property>
    </widget>
-   <widget class="QProgressBar" name="progressBar_9">
-    <property name="geometry">
-     <rect>
-      <x>820</x>
-      <y>230</y>
-      <width>118</width>
-      <height>30</height>
-     </rect>
-    </property>
-    <property name="value">
-     <number>24</number>
-    </property>
-    <property name="alignment">
-     <set>Qt::AlignCenter</set>
-    </property>
-   </widget>
    <widget class="QLabel" name="label_irizq_2">
     <property name="geometry">
      <rect>
-      <x>500</x>
-      <y>230</y>
-      <width>231</width>
+      <x>240</x>
+      <y>190</y>
+      <width>131</width>
       <height>31</height>
      </rect>
     </property>
@@ -688,8 +424,8 @@
    <widget class="QLCDNumber" name="lcdNumber_9">
     <property name="geometry">
      <rect>
-      <x>740</x>
-      <y>270</y>
+      <x>380</x>
+      <y>230</y>
       <width>64</width>
       <height>30</height>
      </rect>
@@ -704,44 +440,12 @@
      <enum>QLCDNumber::Flat</enum>
     </property>
    </widget>
-   <widget class="QProgressBar" name="progressBar_10">
-    <property name="geometry">
-     <rect>
-      <x>820</x>
-      <y>350</y>
-      <width>118</width>
-      <height>30</height>
-     </rect>
-    </property>
-    <property name="value">
-     <number>24</number>
-    </property>
-    <property name="alignment">
-     <set>Qt::AlignCenter</set>
-    </property>
-   </widget>
-   <widget class="QProgressBar" name="progressBar_11">
-    <property name="geometry">
-     <rect>
-      <x>820</x>
-      <y>310</y>
-      <width>118</width>
-      <height>30</height>
-     </rect>
-    </property>
-    <property name="value">
-     <number>24</number>
-    </property>
-    <property name="alignment">
-     <set>Qt::AlignCenter</set>
-    </property>
-   </widget>
    <widget class="QLabel" name="label_irder_3">
     <property name="geometry">
      <rect>
-      <x>500</x>
-      <y>310</y>
-      <width>231</width>
+      <x>240</x>
+      <y>270</y>
+      <width>131</width>
       <height>31</height>
      </rect>
     </property>
@@ -757,8 +461,8 @@
    <widget class="QLCDNumber" name="lcdNumber_11">
     <property name="geometry">
      <rect>
-      <x>740</x>
-      <y>310</y>
+      <x>380</x>
+      <y>270</y>
       <width>64</width>
       <height>30</height>
      </rect>
@@ -776,9 +480,9 @@
    <widget class="QLabel" name="label_irizq_3">
     <property name="geometry">
      <rect>
-      <x>500</x>
-      <y>350</y>
-      <width>231</width>
+      <x>240</x>
+      <y>310</y>
+      <width>131</width>
       <height>31</height>
      </rect>
     </property>
@@ -794,8 +498,8 @@
    <widget class="QLCDNumber" name="lcdNumber_12">
     <property name="geometry">
      <rect>
-      <x>740</x>
-      <y>350</y>
+      <x>380</x>
+      <y>310</y>
       <width>64</width>
       <height>30</height>
      </rect>
@@ -808,6 +512,29 @@
     </property>
     <property name="segmentStyle">
      <enum>QLCDNumber::Flat</enum>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_Refresh">
+    <property name="geometry">
+     <rect>
+      <x>39</x>
+      <y>10</y>
+      <width>81</width>
+      <height>24</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Refresh</string>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="comboBox_SerialSelector">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>40</y>
+      <width>121</width>
+      <height>24</height>
+     </rect>
     </property>
    </widget>
   </widget>
